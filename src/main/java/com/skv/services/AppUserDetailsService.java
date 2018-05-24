@@ -21,5 +21,4 @@ public class AppUserDetailsService implements UserDetailsService {
 		User user = userService.find(username);
 		return  user;
 	}
-
 }

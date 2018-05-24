@@ -11,5 +11,4 @@ public class CustomErrorType {
     public String getErrorMessage() {
         return errorMessage;
     }
-
 }
