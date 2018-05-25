@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 @Scope("session")
 public  class User implements UserDetails {
     public static enum Role{ USER }
@@ -48,9 +48,9 @@ public  class User implements UserDetails {
     }
 
     public User(String username,String password,String fullName) {
-        this.username=username;
-        this.password= password;
-        this.fullName=fullName;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
     }
     @JsonIgnore
     @Override
