@@ -2,7 +2,7 @@ package com.skv.controller;
 
 import java.security.Principal;
 
-import com.skv.entities.User;
+import com.skv.domain.User;
 import com.skv.services.UserService;
 import com.skv.util.CustomErrorType;
 import org.slf4j.Logger;

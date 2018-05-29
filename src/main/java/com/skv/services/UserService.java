@@ -1,7 +1,7 @@
 package com.skv.services;
 
-import com.skv.dao.UserRepository;
-import com.skv.entities.User;
+import com.skv.persistance.UserRepository;
+import com.skv.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.skv.dao;
+package com.skv.persistance;
 
-import com.skv.entities.User;
+import com.skv.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

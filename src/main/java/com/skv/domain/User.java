@@ -1,4 +1,4 @@
-package com.skv.entities;
+package com.skv.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;

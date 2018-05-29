@@ -1,6 +1,6 @@
 package com.skv.services;
 
-import com.skv.entities.User;
+import com.skv.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
