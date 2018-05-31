@@ -24,10 +24,23 @@ public class GameController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Game updateGame(@PathVariable Long id, @RequestBody Game updGame) {
+        return gameRepository.save(updGame);
+    }
+
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Game getGame(@PathVariable Long id) {
         return gameRepository.findOne(id);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteGame(@PathVariable Long id) {
+        gameRepository.delete(id);
+    }
+
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)

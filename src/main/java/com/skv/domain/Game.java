@@ -1,8 +1,6 @@
 package com.skv.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +14,11 @@ public class Game {
     private Team team1;
     @ManyToOne
     private Team team2;
+
+    @Column(nullable = true)
+    private Integer score1;
+    @Column(nullable = true)
+    private Integer score2;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm")
     private LocalDateTime startDateTime;
@@ -42,6 +45,22 @@ public class Game {
 
     public void setTeam2(Team team2) {
         this.team2 = team2;
+    }
+
+    public Integer getScore1() {
+        return score1;
+    }
+
+    public void setScore1(Integer score1) {
+        this.score1 = score1;
+    }
+
+    public Integer getScore2() {
+        return score2;
+    }
+
+    public void setScore2(Integer score2) {
+        this.score2 = score2;
     }
 
     public LocalDateTime getStartDateTime() {
