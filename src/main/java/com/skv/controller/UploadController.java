@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 @RequestMapping("files")
 public class UploadController {
 
-    public static final Logger logger = LoggerFactory.getLogger(AccountController.class);
-
 	@Autowired
 	StorageService storageService;
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @RestController
 @RequestMapping("teams")
@@ -30,6 +30,12 @@ public class TeamController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Team getTeam(@PathVariable Long id) {
         return teamRepository.findOne(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Team> getTeams() {
+        return teamRepository.findAll();
     }
 
     @CrossOrigin
