@@ -1,9 +1,10 @@
 package com.skv.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Game {
@@ -22,6 +23,10 @@ public class Game {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm")
     private LocalDateTime startDateTime;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Bet> bets;
 
     public long getId() {
         return id;
@@ -69,5 +74,13 @@ public class Game {
 
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
+    }
+
+    public List<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
     }
 }

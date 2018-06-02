@@ -15,7 +15,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}, name = "username_constraint"),
+        @UniqueConstraint(columnNames = {"fullName"}, name = "fullName_constraint")
+})
 @Scope("session")
 public  class User implements UserDetails {
     public static enum Role{ USER }
