@@ -1,6 +1,6 @@
 package com.skv.util;
 
-public class CustomErrorType {
+public class CustomErrorType extends Exception {
 
     private String errorMessage;
 

@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                  * cleaning up any {link rememberMe()} authentication that was configured, */
                 .logout()
                 .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).logoutSuccessUrl("/account/logout")
                 .and()
                 // enabling the basic authentication
                 .httpBasic().and()

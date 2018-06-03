@@ -48,6 +48,10 @@ public class AccountController {
         return principal;
     }
 
-
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ResponseEntity<?> logout() {
+        logger.info("user logout");
+        return ResponseEntity.ok().body("user logout");
+    }
 
 }
