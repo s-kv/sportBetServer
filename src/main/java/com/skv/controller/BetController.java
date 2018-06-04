@@ -20,7 +20,7 @@ public class BetController {
     @Autowired
     private BetRepository betRepository;
     @Autowired
-    private PointsCalculator simplePointsCalculator;
+    private PointsCalculator pointsCalculator;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
@@ -58,7 +58,7 @@ public class BetController {
     public List<Bet> getBetByUser(@PathVariable Long id) {
         return betRepository.findAll().stream()
                 .filter(x -> x.getUser().getId() == id)
-                .map(x -> { x.setPoints(simplePointsCalculator.calculate(x)); return x; })
+                .map(x -> { x.setPoints(pointsCalculator.calculate(x)); return x; })
                 .collect(Collectors.toList());
     }
 }
