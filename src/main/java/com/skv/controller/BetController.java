@@ -3,12 +3,12 @@ package com.skv.controller;
 import com.skv.domain.Bet;
 import com.skv.persistance.BetRepository;
 import com.skv.util.CustomErrorType;
+import com.skv.util.PointsCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +19,8 @@ public class BetController {
     public static final Logger logger = LoggerFactory.getLogger(BetController.class);
     @Autowired
     private BetRepository betRepository;
+    @Autowired
+    private PointsCalculator simplePointsCalculator;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
@@ -54,6 +56,9 @@ public class BetController {
     @CrossOrigin
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public List<Bet> getBetByUser(@PathVariable Long id) {
-        return betRepository.findAll().stream().filter(x -> x.getUser().getId() == id).collect(Collectors.toList());
+        return betRepository.findAll().stream()
+                .filter(x -> x.getUser().getId() == id)
+                .map(x -> { x.setPoints(simplePointsCalculator.calculate(x)); return x; })
+                .collect(Collectors.toList());
     }
 }

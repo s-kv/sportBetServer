@@ -21,6 +21,9 @@ public class Bet {
     private Integer score1;
     private Integer score2;
 
+    @Transient
+    private Integer points;
+
     public long getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class Bet {
 
     public void setScore2(Integer score2) {
         this.score2 = score2;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 }
