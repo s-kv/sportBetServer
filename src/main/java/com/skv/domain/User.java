@@ -2,6 +2,7 @@ package com.skv.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -46,6 +47,13 @@ public  class User implements UserDetails {
      * Description of the property full name.
      */
     private String fullName;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Bet> bets;
+
+    @Transient
+    private Integer points;
 
     public User() {
     }
@@ -131,5 +139,21 @@ public  class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public List<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
     }
 }
