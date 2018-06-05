@@ -24,7 +24,7 @@ public class Game {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm")
     private LocalDateTime startDateTime;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Bet> bets;
 
@@ -80,7 +80,7 @@ public class Game {
         return bets;
     }
 
-    public void setBets(List<Bet> bets) {
+    /*public void setBets(List<Bet> bets) {
         this.bets = bets;
-    }
+    }*/
 }
