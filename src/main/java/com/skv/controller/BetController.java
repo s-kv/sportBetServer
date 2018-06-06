@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class BetController {
     }
 
     private void checkBet(Bet updBet) throws CustomErrorType {
-        if (LocalDateTime.now().isAfter(updBet.getGame().getStartDateTime()))
+        if (LocalDateTime.now(ZoneId.of("UTC+3")).isAfter(updBet.getGame().getStartDateTime()))
             throw new CustomErrorType("Запрещено редактировать или устанавливать ставку после начала матча!");
     }
 
