@@ -1,7 +1,9 @@
 package com.skv.controller;
 
+import com.skv.domain.Bet;
 import com.skv.domain.Game;
 import com.skv.domain.User;
+import com.skv.persistance.BetRepository;
 import com.skv.persistance.GameRepository;
 import com.skv.persistance.UserRepository;
 import org.slf4j.Logger;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +26,8 @@ public class GameController {
     private GameRepository gameRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BetRepository betRepository;
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
@@ -60,10 +66,28 @@ public class GameController {
         gameRepository.delete(game);
     }
 
-
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Game> getGames() {
-        return gameRepository.findAll();
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public List<Game> getGamesWithUserBet(@PathVariable Long id) {
+        List<Bet> userBets = betRepository.findByUser(userRepository.findOne(id));
+
+        return gameRepository.findAll().stream()
+                .map(x -> {
+                    x.setBet(userBets.stream()
+                            .filter(y -> y.getGame().getId() == x.getId())
+                            .mapToLong(y -> y.getId())
+                            .findFirst().orElse(0L));
+                    return x;
+                })
+                .sorted((x, y) -> {
+                    LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC+3"));
+                    if (x.getStartDateTime().isBefore(now) && y.getStartDateTime().isAfter(now))
+                        return 1;
+                    else if (x.getStartDateTime().isAfter(now) && y.getStartDateTime().isBefore(now))
+                        return -1;
+                    else
+                        return x.getStartDateTime().isBefore(y.getStartDateTime()) ? -1 : 1;
+                })
+                .collect(Collectors.toList());
     }
 }

@@ -28,6 +28,9 @@ public class Game {
     @JsonIgnore
     private List<Bet> bets;
 
+    @Transient
+    long bet;
+
     public long getId() {
         return id;
     }
@@ -80,7 +83,11 @@ public class Game {
         return bets;
     }
 
-    /*public void setBets(List<Bet> bets) {
-        this.bets = bets;
-    }*/
+    public Long getBet() {
+        return bet;
+    }
+
+    public void setBet(Long bet) {
+        this.bet = bet;
+    }
 }
